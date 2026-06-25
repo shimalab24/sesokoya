@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>星と水の宿 SESOKOYA</title>
+  <meta name="description" content="瀬底島の古民家を一棟貸しで。プール、サウナ、満天の星を静かに過ごす宿。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&amp;family=Murecho:wght@300;400;500&amp;family=Shippori+Mincho:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#F7F2E8;
+      --ink:#211F18;
+      --bg-alt:#ECE2CF;
+      --muted:#877E6C;
+      --accent:#7A5A38;
+      --night-bg:#0C1117;
+      --night-ink:#ECEDE9;
+      --night-mut:#6C7782;
+      --water:#4FA2B4;
+      --star:#E9E1C4;
+      --display:'Shippori Mincho', serif;
+      --latin:'Marcellus', serif;
+      --body:'Murecho', sans-serif;
+      --fs-h1:clamp(2.55rem, 6.2vw, 5rem);
+      --fs-h2:clamp(1.85rem, 4vw, 3rem);
+      --fs-h3:clamp(1.25rem, 2.3vw, 1.7rem);
+      --fs-lead:clamp(1.05rem, 1.9vw, 1.35rem);
+      --fs-body:1.0625rem;
+      --fs-label:.74rem;
+      --sp-section:clamp(72px, 11vw, 152px);
+      --sp-gap:28px;
+      --measure:32em;
+      --banner-h:40px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;background:var(--night-bg)}
+    body{
+      margin:0;
+      min-width:320px;
+      color:var(--ink);
+      background:var(--bg);
+      font-family:var(--latin), var(--body);
+      font-size:var(--fs-body);
+      font-weight:300;
+      line-height:1.95;
+      letter-spacing:.01em;
+      word-break:normal;
+      overflow-wrap:normal;
+      line-break:strict;
+      text-wrap:pretty;
+    }
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:200;
+      pointer-events:none;
+      opacity:.05;
+      mix-blend-mode:multiply;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+    }
+    h1,h2,h3,h4,h5,h6,.lead{overflow-wrap:normal}
+    h1,h2,h3,.brand,.nav-links{font-feature-settings:"palt" 1}
+    h1,h2,h3,p{margin:0}
+    p{word-break:auto-phrase}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+    .nowrap{white-space:nowrap}
+    .latin{font-family:var(--latin), var(--body)}
+
+    .demo-banner{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:300;
+      height:var(--banner-h);
+      display:grid;
+      place-items:center;
+      padding:0 16px;
+      color:#f6f2e8;
+      background:#071120;
+      font-family:var(--body);
+      font-size:12px;
+      line-height:1.25;
+      letter-spacing:.08em;
+      text-align:center;
+    }
+    .site-nav{
+      position:absolute;
+      top:calc(var(--banner-h) + clamp(22px, 3vw, 42px));
+      left:clamp(20px, 4vw, 56px);
+      right:clamp(20px, 4vw, 56px);
+      z-index:20;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      color:var(--night-ink);
+      font-family:var(--latin), var(--body);
+      font-size:var(--fs-label);
+      line-height:1;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
+    .nav-mark{white-space:nowrap}
+    .nav-links{display:flex;gap:clamp(14px, 2vw, 28px);align-items:center}
+    .nav-links a{opacity:.86;transition:opacity .2s ease}
+    .nav-links a:hover{opacity:1}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:16px 30px;
+      border:1px solid currentColor;
+      border-radius:0;
+      font-family:var(--latin), var(--body);
+      font-size:var(--fs-label);
+      line-height:1;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      transition:background-color 200ms ease-out, color 200ms ease-out, transform 200ms ease-out;
+    }
+    .btn:hover{background:var(--ink);color:var(--bg)}
+    .night .btn:hover,.hero .btn:hover,.final-cta .btn:hover{background:var(--night-ink);color:var(--night-bg)}
+
+    .section-title{
+      font-family:var(--display);
+      font-size:var(--fs-h2);
+      font-weight:400;
+      line-height:1.28;
+      letter-spacing:.03em;
+    }
+    .lead{
+      max-width:var(--measure);
+      font-size:var(--fs-lead);
+      line-height:1.95;
+    }
+    .section{
+      position:relative;
+      padding:var(--sp-section) clamp(20px, 5vw, 72px);
+      isolation:isolate;
+    }
+    .section-inner{
+      width:min(1180px, 100%);
+      margin:0 auto;
+    }
+    .hairline{height:1px;background:color-mix(in srgb, var(--accent) 30%, transparent)}
+
+    .hero{
+      position:relative;
+      min-height:100svh;
+      padding:calc(var(--banner-h) + 92px) clamp(20px, 5vw, 72px) 52px;
+      display:grid;
+      align-items:end;
+      overflow:hidden;
+      color:var(--night-ink);
+      background:var(--night-bg);
+      isolation:isolate;
+    }
+    .hero-media{
+      position:absolute;
+      inset:-5vh 0;
+      z-index:-3;
+      will-change:transform;
+    }
+    .hero-media img{
+      width:100%;
+      height:112%;
+      object-fit:cover;
+      object-position:center;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:
+        linear-gradient(180deg, rgba(12,17,23,.74), rgba(12,17,23,.34) 45%, rgba(12,17,23,.82)),
+        radial-gradient(circle at 52% 62%, rgba(79,162,180,.2), transparent 42%);
+    }
+    .hero-copy{
+      width:min(980px, 100%);
+      margin:0 auto;
+      text-align:center;
+    }
+    .hero h1{
+      font-family:var(--display);
+      font-size:var(--fs-h1);
+      font-weight:400;
+      line-height:1.18;
+      letter-spacing:.04em;
+    }
+    .hero-brand{
+      margin:34px 0 0;
+      font-family:var(--latin), var(--body);
+      font-size:.78rem;
+      line-height:1.8;
+      letter-spacing:.36em;
+      text-transform:uppercase;
+    }
+    .hero-sub{
+      margin-top:10px;
+      color:rgba(236,237,233,.82);
+      font-size:.94rem;
+      line-height:1.8;
+      letter-spacing:.08em;
+    }
+
+    .split{
+      display:grid;
+      grid-template-columns:minmax(0, 1.05fr) minmax(0, .82fr);
+      gap:clamp(34px, 6vw, 86px);
+      align-items:center;
+    }
+    .split.reverse{grid-template-columns:minmax(0, .82fr) minmax(0, 1.05fr)}
+    .copy-stack{display:grid;gap:24px;align-content:center}
+    .photo-stack{
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(0, .58fr);
+      gap:14px;
+      align-items:end;
+    }
+    .photo-stack .large{aspect-ratio:4/5}
+    .photo-stack .small{aspect-ratio:3/4;margin-bottom:10%}
+    .split > *,
+    .day-grid > *,
+    .asym-gallery > *,
+    .night-grid > *,
+    .night-photos > *,
+    .gallery-grid > *,
+    .footer-inner > *{min-width:0}
+    .photo-frame{
+      position:relative;
+      overflow:hidden;
+      background:var(--bg-alt);
+    }
+    .photo-frame img{width:100%;height:100%;object-fit:cover}
+    .photo-caption{
+      margin-top:12px;
+      color:var(--muted);
+      font-family:var(--latin), var(--body);
+      font-size:.72rem;
+      line-height:1;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .amenities{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      border-top:1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+      border-bottom:1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+    }
+    .amenities span{
+      min-width:0;
+      padding:14px 8px;
+      color:var(--muted);
+      font-size:.9rem;
+      line-height:1.4;
+      text-align:center;
+      border-right:1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    .amenities span:last-child{border-right:0}
+
+    .day-grid{
+      display:grid;
+      grid-template-columns:minmax(0, .7fr) minmax(0, 1.25fr);
+      gap:clamp(30px, 5vw, 72px);
+      align-items:end;
+    }
+    .day-copy{padding-bottom:clamp(0px, 4vw, 52px)}
+    .asym-gallery{
+      display:grid;
+      grid-template-columns:minmax(0, 1.25fr) minmax(0, .78fr);
+      grid-template-rows:auto auto;
+      gap:14px;
+    }
+    .asym-gallery .main{grid-row:1 / span 2;aspect-ratio:4/5}
+    .asym-gallery .sub{aspect-ratio:4/3}
+    .asym-gallery img{width:100%;height:100%;object-fit:cover}
+
+    .material-curve{
+      position:absolute;
+      left:0;
+      bottom:-1px;
+      z-index:-1;
+      width:100%;
+      height:120px;
+      background:
+        radial-gradient(95% 100% at 50% 0%, transparent 58%, var(--bg-alt) 59%);
+      opacity:.6;
+    }
+
+    .night{
+      color:var(--night-ink);
+      background:var(--night-bg);
+    }
+    .night::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      opacity:.55;
+      background:
+        radial-gradient(circle at 17% 18%, rgba(233,225,196,.9) 0 1px, transparent 2px),
+        radial-gradient(circle at 77% 20%, rgba(233,225,196,.8) 0 1px, transparent 2px),
+        radial-gradient(circle at 88% 52%, rgba(233,225,196,.7) 0 1px, transparent 2px),
+        radial-gradient(circle at 38% 76%, rgba(79,162,180,.55) 0 1px, transparent 2px);
+      animation:starPulse 4.8s ease-in-out infinite alternate;
+    }
+    .night .lead,.night .photo-caption{color:rgba(236,237,233,.72)}
+    .night-grid{
+      display:grid;
+      grid-template-columns:minmax(0, .9fr) minmax(0, 1.1fr);
+      gap:clamp(36px, 6vw, 84px);
+      align-items:start;
+    }
+    .night-photos{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(0, 1fr);
+      gap:14px;
+      align-items:end;
+    }
+    .night-photos .wide{grid-column:1 / -1;aspect-ratio:16/10}
+    .night-photos .tall{aspect-ratio:3/4}
+    .night-photos .square{aspect-ratio:1}
+    .night-photos img{width:100%;height:100%;object-fit:cover}
+    .experience{
+      display:grid;
+      gap:16px;
+      margin-top:34px;
+      padding-top:28px;
+      border-top:1px solid color-mix(in srgb, var(--water) 50%, transparent);
+    }
+    .experience p{
+      max-width:24em;
+      color:rgba(236,237,233,.86);
+      font-family:var(--display);
+      font-size:clamp(1.15rem, 2vw, 1.5rem);
+      line-height:1.8;
+      letter-spacing:.02em;
+    }
+    .quote{
+      margin-top:42px;
+      padding-left:22px;
+      border-left:1px solid color-mix(in srgb, var(--water) 62%, transparent);
+      display:grid;
+      gap:18px;
+      color:rgba(236,237,233,.86);
+      font-family:var(--display);
+      font-size:clamp(1.05rem, 1.8vw, 1.32rem);
+      line-height:1.85;
+    }
+    .quote cite{
+      color:var(--night-mut);
+      font-family:var(--latin), var(--body);
+      font-size:var(--fs-label);
+      font-style:normal;
+      line-height:1;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+    }
+
+    .gallery-head{
+      display:flex;
+      justify-content:space-between;
+      gap:28px;
+      align-items:end;
+      margin-bottom:clamp(28px, 5vw, 56px);
+    }
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(6, minmax(0, 1fr));
+      gap:14px;
+    }
+    .gallery-item{
+      min-width:0;
+      display:grid;
+      gap:10px;
+    }
+    .gallery-item:nth-child(1),
+    .gallery-item:nth-child(4){grid-column:span 2}
+    .gallery-item:nth-child(2),
+    .gallery-item:nth-child(3),
+    .gallery-item:nth-child(5),
+    .gallery-item:nth-child(6){grid-column:span 2}
+    .gallery-item .photo-frame{aspect-ratio:4/3}
+    .gallery-item:nth-child(1) .photo-frame,
+    .gallery-item:nth-child(4) .photo-frame{aspect-ratio:3/4}
+
+    .location-card{
+      min-width:0;
+      padding:clamp(24px, 4vw, 44px);
+      background:var(--bg-alt);
+      border:1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    .info-list{
+      display:grid;
+      gap:0;
+      margin-top:30px;
+      border-top:1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+    }
+    .info-row{
+      display:grid;
+      grid-template-columns:minmax(0, .42fr) minmax(0, 1fr);
+      gap:18px;
+      padding:16px 0;
+      border-bottom:1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+    }
+    .info-row dt{
+      color:var(--muted);
+      font-family:var(--latin), var(--body);
+      font-size:var(--fs-label);
+      line-height:1.6;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .info-row dd{margin:0;line-height:1.75}
+
+    .final-cta{
+      position:relative;
+      min-height:72svh;
+      display:grid;
+      align-items:center;
+      overflow:hidden;
+      color:var(--night-ink);
+      background:var(--night-bg);
+      isolation:isolate;
+    }
+    .final-cta::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-2;
+      background:url("photos/sesoko-38.jpg") center / cover no-repeat;
+    }
+    .final-cta::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      background:linear-gradient(90deg, rgba(12,17,23,.88), rgba(12,17,23,.36) 68%, rgba(12,17,23,.72));
+    }
+    .final-cta .section-inner{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr);
+      gap:30px;
+    }
+    .brand{
+      font-family:var(--display);
+      font-size:clamp(2rem, 4.6vw, 4.2rem);
+      font-weight:400;
+      line-height:1.25;
+      letter-spacing:.04em;
+    }
+
+    .footer{
+      padding:42px clamp(20px, 5vw, 72px) 48px;
+      color:var(--muted);
+      background:var(--bg);
+      border-top:1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+    }
+    .footer-inner{
+      width:min(1180px, 100%);
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) auto;
+      gap:28px;
+      align-items:end;
+    }
+    .footer-brand{
+      color:var(--ink);
+      font-family:var(--latin), var(--body);
+      font-size:1.05rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+    }
+    .footer p,.footer a{
+      font-size:.86rem;
+      line-height:1.9;
+    }
+    .footer-links{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      font-family:var(--latin), var(--body);
+      font-size:var(--fs-label);
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity 700ms cubic-bezier(.22,1,.36,1), transform 700ms cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.is-visible{opacity:1;transform:translateY(0)}
+
+    @keyframes starPulse{from{opacity:.32}to{opacity:.82}}
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{animation:none!important;transition:none!important}
+      .reveal{opacity:1;transform:none}
+    }
+    @media (max-width:860px){
+      .nav-links{display:none}
+      .hero{min-height:94svh;padding-bottom:44px}
+      .split,.split.reverse,.day-grid,.night-grid{
+        grid-template-columns:minmax(0, 1fr);
+      }
+      .split.reverse .location-card{order:2}
+      .split.reverse .copy-stack{order:1}
+      .photo-stack{grid-template-columns:minmax(0, 1fr) minmax(0, .62fr)}
+      .day-copy{padding-bottom:0}
+      .gallery-head{display:grid}
+      .gallery-grid{grid-template-columns:repeat(2, minmax(0, 1fr))}
+      .gallery-item,
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(2),
+      .gallery-item:nth-child(3),
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(5),
+      .gallery-item:nth-child(6){grid-column:span 1}
+      .footer-inner{grid-template-columns:minmax(0, 1fr)}
+      .footer-links{flex-wrap:wrap}
+    }
+    @media (max-width:560px){
+      :root{--fs-h1:clamp(2.28rem, 12vw, 3.1rem);--fs-body:1rem}
+      .demo-banner{font-size:11px;letter-spacing:.04em}
+      .site-nav{left:18px;right:18px}
+      .hero-brand{letter-spacing:.24em}
+      .hero-sub{font-size:.88rem}
+      .section{padding-left:18px;padding-right:18px}
+      .photo-stack,.asym-gallery,.night-photos{grid-template-columns:minmax(0, 1fr)}
+      .photo-stack .small{margin-bottom:0}
+      .asym-gallery .main{grid-row:auto}
+      .amenities{grid-template-columns:minmax(0, 1fr)}
+      .amenities span{border-right:0;border-bottom:1px solid color-mix(in srgb, var(--accent) 18%, transparent)}
+      .amenities span:last-child{border-bottom:0}
+      .info-row{grid-template-columns:minmax(0, 1fr);gap:4px}
+      .gallery-grid{grid-template-columns:minmax(0, 1fr)}
+      .final-cta::after{background:linear-gradient(180deg, rgba(12,17,23,.78), rgba(12,17,23,.72))}
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">DEMO SITE / 島ラボ制作サンプル</div>
+
+  <header class="hero" id="top">
+    <!-- 写真差し込み: 夜のライトアッププール・ローンジ -->
+    <div class="hero-media" data-parallax>
+      <img src="photos/sesoko-10.jpg" alt="夜にライトアップされたSESOKOYAのプール">
+    </div>
+    <nav class="site-nav" aria-label="サイト内ナビゲーション">
+      <a class="nav-mark" href="#top">星と水の宿 SESOKOYA</a>
+      <div class="nav-links">
+        <a href="#house">宿</a>
+        <a href="#night">夜</a>
+        <a href="#gallery">写真</a>
+        <a href="#location">場所</a>
+        <a href="#reserve">予約</a>
+      </div>
+    </nav>
+    <div class="hero-copy reveal">
+      <h1>星と水にととのう</h1>
+      <p class="hero-brand">星と水の宿 SESOKOYA</p>
+      <p class="hero-sub">瀬底島の古民家を一棟貸しで</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="house">
+      <div class="section-inner split">
+        <div class="photo-stack reveal">
+          <!-- 写真差し込み: 高天井の内観 -->
+          <figure class="photo-frame large">
+            <img src="photos/sesoko-26.jpg" alt="高い天井と木の梁が見える室内">
+          </figure>
+          <!-- 写真差し込み: 古材と水回りの陰影 -->
+          <figure class="photo-frame small">
+            <img src="photos/sesoko-03.jpg" alt="古材の質感が残る洗面とシャワールーム">
+          </figure>
+        </div>
+        <div class="copy-stack reveal">
+          <h2 class="section-title"><span class="nowrap">天井が高く</span> <span class="nowrap">ゆったりとした古民家</span></h2>
+          <p class="lead">ホテルではなく、一棟貸し。</p>
+          <div class="amenities" aria-label="設備">
+            <span>キッチン</span>
+            <span>洗濯機</span>
+            <span>Wi-Fi</span>
+          </div>
+        </div>
+      </div>
+      <div class="material-curve" aria-hidden="true"></div>
+    </section>
+
+    <section class="section" id="day">
+      <div class="section-inner day-grid">
+        <div class="copy-stack day-copy reveal">
+          <h2 class="section-title"><span class="nowrap">庭に、</span><span class="nowrap">存在感のあるプール</span></h2>
+          <p class="lead">一部は温水。親の目も届く、プライベートな庭。</p>
+        </div>
+        <div class="asym-gallery reveal">
+          <!-- 写真差し込み: 昼のプール -->
+          <figure class="photo-frame main">
+            <img src="photos/sesoko-21.jpg" alt="昼の庭にあるプライベートプール">
+          </figure>
+          <!-- 写真差し込み: 寝室 -->
+          <figure class="photo-frame sub">
+            <img src="photos/sesoko-02.jpg" alt="木の壁に囲まれた寝室">
+          </figure>
+          <!-- 写真差し込み: ダイニング -->
+          <figure class="photo-frame sub">
+            <img src="photos/sesoko-14.jpg" alt="室内のダイニングとリビング">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section night" id="night">
+      <div class="section-inner night-grid">
+        <div class="copy-stack reveal">
+          <h2 class="section-title">夜は幻想的</h2>
+          <div class="experience">
+            <p>サウナのあとに飛び込んで リクライニングチェアで外気浴。</p>
+            <p>見上げれば、満天の星。</p>
+          </div>
+          <div class="quote" aria-label="宿泊者の声">
+            <p>サウナ後に飛び込んで、その後リクライニングチェアーで外気浴。本当に最高でした。</p>
+            <p>満天の星空が綺麗で、自然の美しさに圧巻でした。</p>
+            <cite>Guest Voice</cite>
+          </div>
+        </div>
+        <div class="night-photos reveal">
+          <!-- 写真差し込み: 夜の内外がつながる古民家 -->
+          <figure class="photo-frame wide">
+            <img src="photos/sesoko-09.jpg" alt="夜の室内からプールを望む縁側">
+          </figure>
+          <!-- 写真差し込み: サウナ小屋 -->
+          <figure class="photo-frame tall">
+            <img src="photos/sesoko-31.jpg" alt="木の壁と照明が見えるサウナ小屋">
+          </figure>
+          <!-- 写真差し込み: 夜のプール -->
+          <figure class="photo-frame square">
+            <img src="photos/sesoko-10.jpg" alt="ライトに照らされた夜のプール">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-inner">
+        <div class="gallery-head reveal">
+          <div>
+            <h2 class="section-title">昼と夜の<span class="latin">SESOKOYA</span></h2>
+          </div>
+          <p class="lead">部屋・夜・プール・サウナ</p>
+        </div>
+        <div class="gallery-grid reveal">
+          <figure class="gallery-item">
+            <!-- 写真差し込み: 寝室 -->
+            <div class="photo-frame"><img src="photos/sesoko-24.jpg" alt="木の梁が見える寝室"></div>
+            <figcaption class="photo-caption">Bedroom</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <!-- 写真差し込み: 内観 -->
+            <div class="photo-frame"><img src="photos/sesoko-20.jpg" alt="室内のリビング"></div>
+            <figcaption class="photo-caption">Living</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <!-- 写真差し込み: 昼プール -->
+            <div class="photo-frame"><img src="photos/sesoko-29.jpg" alt="白い庭と青いプール"></div>
+            <figcaption class="photo-caption">Pool</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <!-- 写真差し込み: サウナ小屋 -->
+            <div class="photo-frame"><img src="photos/sesoko-42.jpg" alt="庭に置かれたサウナ小屋"></div>
+            <figcaption class="photo-caption">Sauna</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <!-- 写真差し込み: キッチン -->
+            <div class="photo-frame"><img src="photos/sesoko-15.jpg" alt="キッチン"></div>
+            <figcaption class="photo-caption">Kitchen</figcaption>
+          </figure>
+          <figure class="gallery-item">
+            <!-- 写真差し込み: プール -->
+            <div class="photo-frame"><img src="photos/sesoko-08.jpg" alt="庭の緑とガゼボ"></div>
+            <figcaption class="photo-caption">Garden</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="location">
+      <div class="section-inner split reverse">
+        <div class="copy-stack reveal">
+          <h2 class="section-title"><span class="nowrap">橋でわたる、</span><span class="nowrap">瀬底島</span></h2>
+          <p class="lead">朝は散歩でビーチまで。</p>
+          <p class="lead">美ら海水族館まで車で約15分。</p>
+          <dl class="info-list">
+            <div class="info-row">
+              <dt>Address</dt>
+              <dd>〒905-0227 沖縄県国頭郡本部町瀬底416</dd>
+            </div>
+            <div class="info-row">
+              <dt>Stay</dt>
+              <dd>一棟貸し／ベッドルーム1・布団4組</dd>
+            </div>
+            <div class="info-row">
+              <dt>Time</dt>
+              <dd>チェックイン 15:00-20:00／チェックアウト 10:00</dd>
+            </div>
+          </dl>
+        </div>
+        <div class="location-card reveal">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4838.305474608283!2d127.864147476501!3d26.647050376806558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34e4fd070a37de55%3A0x2227ac5c20894288!2z5pif44Go5rC044Gu5a6_IFNFU09LT1lB!5e1!3m2!1sja!2sjp!4v1782248736679!5m2!1sja!2sjp" style="width:100%;aspect-ratio:3/2;border:0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-cta" id="reserve">
+      <div class="section-inner reveal">
+        <p class="brand">星と水の宿 SESOKOYA</p>
+        <a class="btn" href="https://www.booking.com/hotel/jp/xing-toshui-nosu-lai-di-dao.ja.html" target="_blank" rel="noopener">空室を見る</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <p class="footer-brand">星と水の宿 SESOKOYA</p>
+        <p>〒905-0227 沖縄県国頭郡本部町瀬底416</p>
+        <p>このページは島ラボによる提案用デモです。</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.booking.com/hotel/jp/xing-toshui-nosu-lai-di-dao.ja.html" target="_blank" rel="noopener">Booking</a>
+        <a href="https://www.instagram.com/sesokoya/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    reveals.forEach((el) => observer.observe(el));
+
+    const media = document.querySelector('[data-parallax]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (media && !reduce && window.innerWidth > 760) {
+      const move = () => {
+        const y = window.scrollY * 0.12;
+        media.style.transform = `translate3d(0, ${y}px, 0)`;
+      };
+      window.addEventListener('scroll', move, { passive: true });
+      move();
+    }
+  </script>
+</body>
+</html>
